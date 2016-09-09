@@ -1,3 +1,5 @@
+# Quiz exercise: How many servers do we need to store 350 million tweets?
+
 import numpy as np
 
 
@@ -28,17 +30,26 @@ class Drive():
     def iops_time(self, num_secs=1):
         return self.num_iops * num_secs
 
-a_server = Server(64, 150)
-a_drive = Drive(150)
-#print(a_server.num_drives * a_drive.iops_time(24 * 3600 / 1e+6))
-#print(a_drive.iops_time(24 * 3600 / 1e+6))
-print('The server can handle', a_server.num_iops(
-    24 * 3600 / 1e+6), 'million operations per day')
+# ------------- run -------------------- #
+
+print("\nA server has a number of drives and each drive",
+      "supports a number of a number of IOPS. If we would like to",
+      "store 350 million tweets, how many servers do we need?\n")
+
+num_drive = int(input("Enter the number of drives the server has: "))
+num_iops = int(input("Enter the number IOPS that each drive supports: "))
+
+a_server = Server(num_drive, num_iops)
+
+print('\nThe server can handle', a_server.num_iops(
+    24 * 3600 / 1e+6), 'million operations per day.\n')
 
 # 350 million tweets < a_server.num_iops(24*3600/1e+6) < 829.44
 
 # Each tweet is written 40 times, it needs 17 servers
-np.ceil(350 * 40 / a_server.num_iops(24 * 3600 / 1e+6))
+print("If each tweet was written 40 times, we would need {n_server} servers.\n".format(
+    n_server=int(np.ceil(350 * 40 / a_server.num_iops(24 * 3600 / 1e+6)))))
+
 # How many SANs are needed to store the tweets? Each SAN can support 80k IOPS
 350 * 1e+6 / 80000
 
