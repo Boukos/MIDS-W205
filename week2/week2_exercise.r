@@ -25,37 +25,12 @@ library(lpSolveAPI)
 ##                     SSD >= 0
 ##          HDD +      SSD  = 12*num_server
 
-## We can write rebalance as an IO bandwith requirement:
-## If the servers need to be rebalanced, they don't provide
-## their full IO bandwidth, interpret rebalancing as  occupying 
-## IO bandwidth (function below is a little bit
-## simplistic, as it assumes that all previous drives on the
-## server were either HDD or SSD)
-rebalance <- function(num_server,stored_data) stored_data/num_server
-
+## rebalance: additional IO bandwidth required for rebalancing
 
 ## Get the mix of HDDs and SSDs which minimize the cost equation
 ##
-## Arguments:
-##        num_day : numeric, denotes the number of days
-##        num_server: numeric, denotes the number of servers
-##        rebalance_data : boolean, if TRUE: rebalance when new server
-##                                     is added to the network
-##                                  if FALSE: do not rebelance when
-##                                      server is added to the
-##                                       network, useful only for
-##                                       checking the impact of rebalancing
-##        price: vector of length 2, denotes the price of HDD and SSD
-##               drives in this order
-## Output:
-##       solved: "yes"/"no" whether the LP problem reached solution
-##       opt_mix: number of HDD and SSD drives in the optimal
-##                solution   
-##       num_server: number of servers
-##       max_storage: available storage capacity for new data
-##                    (rebalancing reduced)
-##       max_IOP: IOP TB/day (a bit artificial but it was easier to
-##                            set up in units of TB and day)
+
+## supplementary function called by get_opt_mix() below
 get_mix <- function(num_day,num_server,rebalance_data,price) {
     stored_data <- 0.5*num_day
     read_data <- 0.05*num_day
@@ -90,6 +65,34 @@ get_mix <- function(num_day,num_server,rebalance_data,price) {
                                     "available"=
                                         get.constraints(lp)[2])))
 }
+
+
+## Arguments:
+##        num_day : numeric, denotes the number of days
+##        num_server: numeric, denotes the number of servers
+##        rebalance_data : boolean, if TRUE: rebalance when new server
+##                                     is added to the network
+##                                  if FALSE: do not rebelance when
+##                                      server is added to the
+##                                       network, useful only for
+##                                       checking the impact of rebalancing
+##        price: vector of length 2, denotes the price of HDD and SSD
+##               drives in this order
+## Output:
+##       Returns a list of:
+##       solved: "yes"/"no" whether the LP problem reached solution
+##       opt_mix: number of HDD and SSD drives in the optimal
+##                solution
+##       cost: the cost of the optimal configuration
+##       num_server: number of servers
+##       storage: list of 2 elements:
+##                required: required storage
+##                available: available storage capacity
+##       IO_bandwidth: list of 2 elements
+##                required: required bandwidth
+##                available: IOP TB/day (a bit artificial
+##                            but it was easier to
+##                            set up in units of TB and day)
 
 get_opt_mix <- function(num_day,rebalance_data=TRUE,price=c(1,3)) {
     solved <- FALSE
