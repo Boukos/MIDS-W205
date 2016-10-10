@@ -1,0 +1,45 @@
+# Correlation between hospital, procedural and patient evaluation scores
+
+The correlations are defined based on those procedures rhar had a sample of more than 50 for each procedure, and a score of 100 or less.
+
+As the output of the code shows below, the correlations between each of these measures is very low along both dimensions of HCAHPS survey measurements. The base and consistency HCAHPS scores are highly correlated.
+```
+# calculate correlation of hospital average score with HCAHPS base score
+hosp_avg_surv.stat.corr('avg(score)','hcahps_base')
+# -0.09947309348326736        
+# calculate correlation of hospital average score with HCAHPS consistency score
+   hosp_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+# 0.03405962378975164 
+# calculate correlation of measure average score with HCAHPS base score
+measure_avg_surv.stat.corr('avg(score)','hcahps_base')
+#-0.0005003159809636114   
+# calculate correlation of measure average score with HCAHPS consistency score
+measure_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+#-0.0003420560781465772   
+# calculate correlation of HCAHSP base score with HCAHPS consistency score
+measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')
+#0.6512279291606266   
+```
+
+
+```
+surveys_selected = surveys_typecast.select('provider_id','hcahps_base','hcahps_consistency')
+procedures_selected = procedure_typecast.select('provider_id','sample','score','measure_id')
+# calculate hospital average scores
+hospital_avg = procedure_typecast.where((procedure_typecast['score']<100)&(procedure_typecast['sample']>50)).groupby('provider_id').agg(func.avg('score'))
+hosp_avg_surv =hospital_avg.join(surveys_selected,surveys_selected.provider_id==hospital_avg.provider_id)
+# calculate correlation of hospital average score with HCAHPS base score
+hosp_avg_surv.stat.corr('avg(score)','hcahps_base')
+# -0.09947309348326736        
+   hosp_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+# 0.03405962378975164 
+measure_avg = procedure_typecast.where((procedure_typecast['score']<100)&(procedure_typecast['sample']>50)).groupby('measure_id').agg(func.avg('score'))
+procedures_surveys = procedures_selected.join(procedures_selected,surveys_selected.provider_id==procedures_selected.provider_id)
+measure_avg_surv = measure_avg.join(procedures_surveys,procedures_surveys.measure_id==measure_avg.measure_id)
+measure_avg_surv.stat.corr('avg(score)','hcahps_base')
+#-0.0005003159809636114   
+measure_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+#-0.0003420560781465772   
+measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')
+#0.6512279291606266    
+```

@@ -1,0 +1,29 @@
+# Most variable procedures
+
+Most variable procedures are deifined by those procedures that had a sample of more than 50 for each procedure and a score not higher than 100.
+
+```
+# join procedure with hospitals
+procedure_hospital = procedure_typecast.join(hospitals,procedure_typecast.provider_id==hospitals.provider_id)
+# subset for those procedures that have a score not higher than 100 and a sample of at least 50, calculate standard deviation
+proc_svd = procedure_hospital.where((procedure_hospital['score']<=100)&(procedure_hospital['sample']>50)).groupby('measure_id').agg(get_sd(procedure_hospital['score']).alias("score_sd"))
+# join with measures, sort and print
+proc_svd_measures= proc_svd.join(measures,measures.measure_id==proc_svd.measure_id)
+proc_svd_measures.sort(proc_svd_measures['score_sd'].desc()).select("measure_id","measure_name","score_sd").show(10)
+```
+
++-------------------------------------------------------------------------------------------+------------------+
+|measure_name                                                                               |score_sd          |
++-------------------------------------------------------------------------------------------+------------------+
+|Thrombolytic Therapy                                                                       |23.87990443101587 |
+|Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate|21.3652105588085  |
+|Admit Decision Time to ED Departure Time for Admitted Patients                             |20.492656736528936|
+|Venous Thromboembolism Warfarin Therapy Discharge Instructions                             |17.146172313152178|
+|Median Time from ED Arrival to Provider Contact for ED patients                            |15.66896236494397 |
+|Median Time to Pain Management for Long Bone Fracture                                      |15.467446280014649|
+|Venous Thromboembolism Prophylaxis                                                         |14.154072029938963|
+|Home Management Plan of Care (HMPC) Document Given to Patient/Caregiver                    |11.700089736028156|
+|Influenza Immunization                                                                     |11.24515533289924 |
+|Median Time from ED Arrival to ED Departure for Admitted ED Patients                       |10.812138722288019|
++-------------------------------------------------------------------------------------------+------------------+
+

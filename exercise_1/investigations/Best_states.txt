@@ -1,0 +1,27 @@
+# Best states
+
+The best states are defined by those states whose hospitals had a sample of more than 50 for each procedure.
+
+```
+procedure_hospital = procedure_typecast.join(hospital,procedure_typecast.provider_id==hospital.provider_id)
+# subset for those procedures that have a score not higher than 100 and a sample of at least 50
+score_avg = procedure_hospital.where((procedure_hospital['score']<=100)&(procedure_hospital['sample']>50)).groupby('state').agg(func.avg('score'))
+# show the 10 best states
+best_states = score_avg.sort(score_avg['avg(score)'].desc()).show(10)
+```
+
++-----+-----------------+                                                       
+|state|       avg(score)|
++-----+-----------------+
+|   VI|            89.65|
+|   PR|88.94219653179191|
+|   MD|88.84135107471853|
+|   NH|88.15384615384616|
+|   DE|87.76404494382022|
+|   DC|            87.39|
+|   NE|86.60236886632826|
+|   CT| 86.3762102351314|
+|   NJ|86.21102982554868|
+|   MT|86.13196480938416|
++-----+-----------------+
+
