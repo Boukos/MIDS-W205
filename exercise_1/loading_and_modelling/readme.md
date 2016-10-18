@@ -5,7 +5,7 @@ In order to compare the hospitals in the [Medicare](https://data.medicare.gov/da
 
 1. What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
 
- Answering this question requires two entities: hospitals and procedures, and the relationship between them is that hospitals perform procedures. One hospital may perform many procedures. The primary keys for these entities are *hospital_id* and *procedure_id*, respectively. The procedures table contains the foreign key *hospital_id* which allows the connection of these tables. 
+ Answering this question requires two entities: hospitals and procedures, and the relationship between them is that hospitals perform procedures. One hospital may perform many procedures. The primary keys for these entities are *hospital_id* and *procedure_id*, respectively. The procedures table contains the foreign key *hospital_id* which allows the connection of these tables. Moreover, procedures can be differentiated by care type, that is, if they are due to readmissions or performed as timely and effective care.
 
 2. What states are models of high-quality care?
 
