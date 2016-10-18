@@ -18,6 +18,6 @@ In order to answer this question, we need to add a new entity, measures, to our 
 
 4. Are average scores for hospital quality or procedural variability correlated with patient survey responses?
 
-Finding correlations of hospital quality or procedural variability requires adding yet another entity, surveys. As each survey evaluates on hospital, surveys are a weak entity connected to hospitals by its primary key *hospital_id*.
+Finding correlations of hospital quality or procedural variability requires adding yet another entity, surveys. As each survey evaluates on hospital, surveys are a weak entity connected to hospitals by the foreign key *hospital_id*.
 
-![](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/loading_and_modelling/W205-Exercise_1_ER_diagram.pdf)
+![](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/loading_and_modelling/W205-Exercise_1.png)
