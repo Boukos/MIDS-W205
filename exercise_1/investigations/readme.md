@@ -15,11 +15,11 @@
  best_hospital_scores.join(hospital,best_hospital_scores.provider_id==hospital.provider_id).select('hospital_name').show(best_hospital_scores.count(),False)
 ```
  
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Tables        | 
+| ------------- |
+| col 3 is      | 
+| col 2 is      | 
+| zebra stripes | 
                                   
  |hospital_name                                |
  | ------------------------------------------- |
