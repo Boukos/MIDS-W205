@@ -21,7 +21,7 @@
 | col 2 is      | 
 | zebra stripes | 
                                   
- |hospital_name                                |
+ | hospital_name                               |
  | ------------------------------------------- |
  |VA EASTERN KANSAS HEALTHCARE SYSTEM          |
  |ANDROSCOGGIN VALLEY HOSPITAL                 |
