@@ -50,7 +50,7 @@
  # show the 10 best states
  best_states = score_avg.sort(score_avg['avg(score)'].desc()).show(10)
  ```
- The commands are very similar to the previous script; the only difference is that here we need to group the hospitals by state and take their averages. 
+ The commands are very similar to the previous script; the only difference is that here we need to group the hospitals by state and take their averages. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/best_states.py).  
                                                        
 |state|       avg(score)|
 |-----|-----------------|
@@ -65,3 +65,69 @@
 |   NJ|86.21102982554868|
 |   MT|86.13196480938416|
 
+ 3. Which procedures have the greatest variability between hospitals?
+ 
+  
+ Most variable procedures are defined by those procedures that had a sample of more than 50 for each procedure and a score not higher than 100. Here, we need to define an additional Python function (`get_sd`) to calculate the sample standard deviation as the in-built function for standard deviation calculates the variabiliy of the population.
+
+ ```
+ # join procedure with hospitals
+ procedure_hospital = procedure_typecast.join(hospitals,procedure_typecast.provider_id==hospitals.provider_id)
+ # subset for those procedures that have a score not higher than 100 and a sample of at least 50, calculate standard deviation
+ proc_svd = procedure_hospital.where((procedure_hospital['score']<=100)&(procedure_hospital['sample']>50)).groupby('measure_id').agg (get_sd(procedure_hospital['score']).alias("score_sd"))
+ # join with measures, sort and print
+ proc_svd_measures= proc_svd.join(measures,measures.measure_id==proc_svd.measure_id)
+ proc_svd_measures.sort(proc_svd_measures['score_sd'].desc()).select("measure_id","measure_name","score_sd").show(10)
+```
+ For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/Variable_procedures.py).
+
+|measure_name                                                                               |score_sd          |
+|-------------------------------------------------------------------------------------------|------------------|
+|Thrombolytic Therapy                                                                       |23.87990443101587 |
+|Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate|21.3652105588085  |
+|Admit Decision Time to ED Departure Time for Admitted Patients                             |20.492656736528936|
+|Venous Thromboembolism Warfarin Therapy Discharge Instructions                             |17.146172313152178|
+|Median Time from ED Arrival to Provider Contact for ED patients                            |15.66896236494397 |
+|Median Time to Pain Management for Long Bone Fracture                                      |15.467446280014649|
+|Venous Thromboembolism Prophylaxis                                                         |14.154072029938963|
+|Home Management Plan of Care (HMPC) Document Given to Patient/Caregiver                    |11.700089736028156|
+|Influenza Immunization                                                                     |11.24515533289924 |
+|Median Time from ED Arrival to ED Departure for Admitted ED Patients                       |10.812138722288019|
+
+ 4. Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+ 
+ 
+ The correlations are defined based on those procedures that had a sample of more than 50 for each procedure, and a score of 100 or less.
+
+ As the output of the code shows below, the correlations between each of these measures is very low along both dimensions of HCAHPS survey measurements, indicating that patient surveys are independent of hospital averages and procedural averages. However, the base and consistency HCAHPS scores are highly correlated.
+ 
+| Variable   | HCAHPS  | Correlation |
+| ---------- | ----------- | ----------- |
+| Hospital  |    Base | -0.099 |
+| Hospial | Consistency | 0.034 |
+ | Procedure | Base | -0.001 |
+ | Procedure | Consistency | -0.000 |
+ | HCAHPS Base | Consistency | 0.651 |
+ ```
+ surveys_selected = surveys_typecast.select('provider_id','hcahps_base','hcahps_consistency')
+ procedures_selected =  procedure_typecast.select('provider_id','sample','score','measure_id')
+ # calculate hospital average scores
+ hospital_avg =  procedure_typecast.where((procedure_typecast['score']<100)&(procedure_typecast['sample']>50)).groupby
+                                                            ('provider_id').agg(func.avg('score'))
+ hosp_avg_surv =hospital_avg.join(surveys_selected,surveys_selected.provider_id==hospital_avg.provider_id)
+ # calculate correlation of hospital average score with HCAHPS base score
+ hosp_avg_surv.stat.corr('avg(score)','hcahps_base')
+ # -0.09947309348326736           
+ hosp_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+ # 0.03405962378975164 measure_avg = procedure_typecast.where((procedure_typecast['score']<100)&
+                                                 (procedure_typecast['sample']>50)).groupby('measure_id').agg(func.avg('score'))
+ procedures_surveys = procedures_selected.join(procedures_selected,surveys_selected.provider_id==procedures_selected.provider_id)
+ measure_avg_surv = measure_avg.join(procedures_surveys,procedures_surveys.measure_id==measure_avg.measure_id)
+ measure_avg_surv.stat.corr('avg(score)','hcahps_base')
+ #-0.0005003159809636114   
+ measure_avg_surv.stat.corr('avg(score)','hcahps_consistency')
+ #-0.0003420560781465772   
+ measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')#
+ 0.6512279291606266
+ ```
+For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/correlation.py)
