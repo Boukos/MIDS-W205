@@ -1,4 +1,4 @@
-i# Loading and modelling data
+# Loading and modelling data
 
 In order to compare the hospitals in the [Medicare](https://data.medicare.gov/data/hospital-compare) sample, we need to load the data into a Hadoop distributed file system, and propose an Entity-Relationship diagram which provides an appropriate model to the data to answer the research questions.
 
