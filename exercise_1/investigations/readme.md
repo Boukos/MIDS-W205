@@ -18,24 +18,24 @@
  ```
  In the script above, procedure_typecast is the dataframe which contains the correctly cast scores (doubles) and sample sizes (integers). Running, the script produces the table below. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/Best_hospitals.py).
  
-|          hospital_name                       | 
-| -------------------------------------------- |
-| VA EASTERN KANSAS HEALTHCARE SYSTEM          | 
-| ANDROSCOGGIN VALLEY HOSPITAL                 | 
-| NEW LONDON HOSPITAL                          |                                 
-| GREENE COUNTY MEDICAL CENTER                 |
-| CLARKE COUNTY HOSPITAL                       |
-| LINCOLN COUNTY MEDICAL CENTER                |
-| MANNING REGIONAL HEALTHCARE CENTER           |
-| CROSSRIDGE COMMUNITY HOSPITAL                |
-| GRAND JUNCTION VA MEDICAL CENTER             |
-| ONECORE HEALTH                               |
-| PERRY MEMORIAL HOSPITAL                      |
-| MINIMALLY INVASIVE SURGERY HOSPITAL          |
-| HILLSBORO AREA HOSPITAL                      |
-| SAINT JOSEPH BEREA                           |
-| PHILADELPHIA VA MEDICAL CENTER               |
-| VA BLACK HILLS HEALTHCARE SYSTEM - FORT MEADE |
+ |          hospital_name                       | 
+ | -------------------------------------------- |
+ | VA EASTERN KANSAS HEALTHCARE SYSTEM          | 
+ | ANDROSCOGGIN VALLEY HOSPITAL                 | 
+ | NEW LONDON HOSPITAL                          |                                 
+ | GREENE COUNTY MEDICAL CENTER                 |
+ | CLARKE COUNTY HOSPITAL                       |
+ | LINCOLN COUNTY MEDICAL CENTER                |
+ | MANNING REGIONAL HEALTHCARE CENTER           |
+ | CROSSRIDGE COMMUNITY HOSPITAL                |
+ | GRAND JUNCTION VA MEDICAL CENTER             |
+ | ONECORE HEALTH                               |
+ | PERRY MEMORIAL HOSPITAL                      |
+ | MINIMALLY INVASIVE SURGERY HOSPITAL          |
+ | HILLSBORO AREA HOSPITAL                      |
+ | SAINT JOSEPH BEREA                           |
+ | PHILADELPHIA VA MEDICAL CENTER               |
+ | VA BLACK HILLS HEALTHCARE SYSTEM - FORT MEADE |
  
 2. What states are models of high-quality care?
  
