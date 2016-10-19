@@ -3,24 +3,6 @@
 The correlations are defined based on those procedures rhar had a sample of more than 50 for each procedure, and a score of 100 or less.
 
 As the output of the code shows below, the correlations between each of these measures is very low along both dimensions of HCAHPS survey measurements. The base and consistency HCAHPS scores are highly correlated.
-```
-# calculate correlation of hospital average score with HCAHPS base score
-hosp_avg_surv.stat.corr('avg(score)','hcahps_base')
-# -0.09947309348326736        
-# calculate correlation of hospital average score with HCAHPS consistency score
-   hosp_avg_surv.stat.corr('avg(score)','hcahps_consistency')
-# 0.03405962378975164 
-# calculate correlation of measure average score with HCAHPS base score
-measure_avg_surv.stat.corr('avg(score)','hcahps_base')
-#-0.0005003159809636114   
-# calculate correlation of measure average score with HCAHPS consistency score
-measure_avg_surv.stat.corr('avg(score)','hcahps_consistency')
-#-0.0003420560781465772   
-# calculate correlation of HCAHSP base score with HCAHPS consistency score
-measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')
-#0.6512279291606266   
-```
-
 
 ```
 surveys_selected = surveys_typecast.select('provider_id','hcahps_base','hcahps_consistency')
