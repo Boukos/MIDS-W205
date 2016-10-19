@@ -1,4 +1,4 @@
-# Investigating the Medicare dataset
+# Investigations of the Medicare dataset
 
 
 1. What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
@@ -105,9 +105,9 @@
 | ---------- | ----------- | ----------- |
 | Hospital  |    Base | -0.099 |
 | Hospial | Consistency | 0.034 |
- | Procedure | Base | -0.001 |
- | Procedure | Consistency | -0.000 |
- | HCAHPS Base | Consistency | 0.651 |
+| Procedure | Base | -0.001 |
+| Procedure | Consistency | -0.000 |
+| HCAHPS Base | Consistency | 0.651 |
  ```
  surveys_selected = surveys_typecast.select('provider_id','hcahps_base','hcahps_consistency')
  procedures_selected =  procedure_typecast.select('provider_id','sample','score','measure_id')
