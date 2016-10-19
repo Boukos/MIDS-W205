@@ -1,11 +1,11 @@
-# Loading and modelling data
+i# Loading and modelling data
 
 In order to compare the hospitals in the [Medicare](https://data.medicare.gov/data/hospital-compare) sample, we need to load the data into a Hadoop distributed file system, and propose an Entity-Relationship diagram which provides an appropriate model to the data to answer the research questions.
 
 
 1. What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
 
- Answering this question requires two entities: hospitals and procedures, and the relationship between them is that hospitals perform procedures. One hospital may perform many procedures. The primary keys for these entities are *provider_id* and *procedure_id*, respectively. The procedures table contains the foreign key *provder_id* which allows the connection of these tables. Moreover, procedures can be differentiated by care type, that is, if they are due to readmissions or performed as timely and effective care.
+ Answering this question requires two entities: hospitals and procedures, and the relationship between them is that hospitals perform procedures. One hospital may perform many procedures. The primary keys for these entities are *provider_id* and *procedure_id*, respectively. The procedures table contains the foreign key *provider_id* which allows the connection of these tables. Moreover, procedures can be differentiated by care type, that is, if they are due to readmissions or performed as timely and effective care.
 
 2. What states are models of high-quality care?
 
