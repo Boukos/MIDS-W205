@@ -128,4 +128,4 @@
  measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')#
  0.6512279291606266
  ```
-For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/correlation.py)
+ For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/correlation.py).
