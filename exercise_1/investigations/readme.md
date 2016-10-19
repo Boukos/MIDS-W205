@@ -15,17 +15,13 @@
  best_hospital_scores.join(hospital,best_hospital_scores.provider_id==hospital.provider_id).select('hospital_name').show(best_hospital_scores.count(),False)
 ```
  
-| Tables        | 
+| hospital_name        | 
 | ------------- |
-| col 3 is      | 
-| col 2 is      | 
-| zebra stripes | 
+| VA EASTERN KANSAS HEALTHCARE SYSTEM      | 
+| ANDROSCOGGIN VALLEY HOSPITAL        | 
+| NEW LONDON HOSPITAL  | 
                                   
- | hospital_name                               |
- | --- |
- | VA EASTERN KANSAS HEALTHCARE SYSTEM          |
- | ANDROSCOGGIN VALLEY HOSPITAL                 |
- | NEW LONDON HOSPITAL                          |
+
  | GREENE COUNTY MEDICAL CENTER                 |
  | CLARKE COUNTY HOSPITAL                       |
  | LINCOLN COUNTY MEDICAL CENTER                |
