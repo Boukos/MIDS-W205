@@ -37,7 +37,7 @@
 | PHILADELPHIA VA MEDICAL CENTER               |
 | VA BLACK HILLS HEALTHCARE SYSTEM - FORT MEADE |
  
- 2. What states are models of high-quality care?
+2. What states are models of high-quality care?
  
  The best states are defined by those states whose hospitals had a sample of more than 50 for each procedure.
 
@@ -65,7 +65,7 @@
 |   NJ|86.21102982554868|
 |   MT|86.13196480938416|
 
- 3. Which procedures have the greatest variability between hospitals?
+3. Which procedures have the greatest variability between hospitals?
  
   
  Most variable procedures are defined by those procedures that had a sample of more than 50 for each procedure and a score not higher than 100. Here, we need to define an additional Python function (`get_sd`) to calculate the sample standard deviation as the in-built function for standard deviation calculates the variabiliy of the population.
@@ -94,9 +94,8 @@
 |Influenza Immunization                                                                     |11.24515533289924 |
 |Median Time from ED Arrival to ED Departure for Admitted ED Patients                       |10.812138722288019|
 
- 4. Are average scores for hospital quality or procedural variability correlated with patient survey responses?
- 
- 
+4. Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+
  The correlations are defined based on those procedures that had a sample of more than 50 for each procedure, and a score of 100 or less.
 
  As the output of the code shows below, the correlations between each of these measures is very low along both dimensions of HCAHPS survey measurements, indicating that patient surveys are independent of hospital averages and procedural averages. However, the base and consistency HCAHPS scores are highly correlated.
