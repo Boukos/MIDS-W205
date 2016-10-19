@@ -52,22 +52,21 @@
  ```
  The commands are very similar to the previous script; the only difference is that here we need to group the hospitals by state and take their averages. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/best_states.py).  
                                                        
-|state|       avg(score)|
-|-----|-----------------|
-|   VI|            89.65|
-|   PR|88.94219653179191|
-|   MD|88.84135107471853|
-|   NH|88.15384615384616|
-|   DE|87.76404494382022|
-|   DC|            87.39|
-|   NE|86.60236886632826|
-|   CT| 86.3762102351314|
-|   NJ|86.21102982554868|
-|   MT|86.13196480938416|
+ |state|       avg(score)|
+ |-----|-----------------|
+ |   VI|            89.65|
+ |   PR|88.94219653179191|
+ |   MD|88.84135107471853|
+ |   NH|88.15384615384616|
+ |   DE|87.76404494382022|
+ |   DC|            87.39|
+ |   NE|86.60236886632826|
+ |   CT| 86.3762102351314|
+ |   NJ|86.21102982554868|
+ |   MT|86.13196480938416| 
 
 3. Which procedures have the greatest variability between hospitals?
- 
-  
+
  Most variable procedures are defined by those procedures that had a sample of more than 50 for each procedure and a score not higher than 100. Here, we need to define an additional Python function (`get_sd`) to calculate the sample standard deviation as the in-built function for standard deviation calculates the variabiliy of the population.
 
  ```
@@ -81,18 +80,18 @@
 ```
  For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/adamlenart-investigations/exercise_1/investigations/Variable_procedures.py).
 
-|measure_name                                                                               |score_sd          |
-|-------------------------------------------------------------------------------------------|------------------|
-|Thrombolytic Therapy                                                                       |23.87990443101587 |
-|Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate|21.3652105588085  |
-|Admit Decision Time to ED Departure Time for Admitted Patients                             |20.492656736528936|
-|Venous Thromboembolism Warfarin Therapy Discharge Instructions                             |17.146172313152178|
-|Median Time from ED Arrival to Provider Contact for ED patients                            |15.66896236494397 |
-|Median Time to Pain Management for Long Bone Fracture                                      |15.467446280014649|
-|Venous Thromboembolism Prophylaxis                                                         |14.154072029938963|
-|Home Management Plan of Care (HMPC) Document Given to Patient/Caregiver                    |11.700089736028156|
-|Influenza Immunization                                                                     |11.24515533289924 |
-|Median Time from ED Arrival to ED Departure for Admitted ED Patients                       |10.812138722288019|
+ |measure_name                                                                               |score_sd          |
+ |-------------------------------------------------------------------------------------------|------------------|
+ |Thrombolytic Therapy                                                                       |23.87990443101587 |
+ |Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate|21.3652105588085  |
+ |Admit Decision Time to ED Departure Time for Admitted Patients                             |20.492656736528936|
+ |Venous Thromboembolism Warfarin Therapy Discharge Instructions                             |17.146172313152178|
+ |Median Time from ED Arrival to Provider Contact for ED patients                            |15.66896236494397 |
+ |Median Time to Pain Management for Long Bone Fracture                                      |15.467446280014649|
+ |Venous Thromboembolism Prophylaxis                                                         |14.154072029938963|
+ |Home Management Plan of Care (HMPC) Document Given to Patient/Caregiver                    |11.700089736028156|
+ |Influenza Immunization                                                                     |11.24515533289924 |
+ |Median Time from ED Arrival to ED Departure for Admitted ED Patients                       |10.812138722288019|
 
 4. Are average scores for hospital quality or procedural variability correlated with patient survey responses?
 
@@ -100,13 +99,13 @@
 
  As the output of the code shows below, the correlations between each of these measures is very low along both dimensions of HCAHPS survey measurements, indicating that patient surveys are independent of hospital averages and procedural averages. However, the base and consistency HCAHPS scores are highly correlated.
  
-| Variable   | HCAHPS  | Correlation |
-| ---------- | ----------- | ----------- |
-| Hospital  |    Base | -0.099 |
-| Hospial | Consistency | 0.034 |
-| Procedure | Base | -0.001 |
-| Procedure | Consistency | -0.000 |
-| HCAHPS Base | Consistency | 0.651 |
+ | Variable   | HCAHPS  | Correlation |
+ | ---------- | ----------- | ----------- |
+ | Hospital  |    Base | -0.099 |
+ | Hospial | Consistency | 0.034 |
+ | Procedure | Base | -0.001 |
+ | Procedure | Consistency | -0.000 |
+ | HCAHPS Base | Consistency | 0.651 |
  ```
  surveys_selected = surveys_typecast.select('provider_id','hcahps_base','hcahps_consistency')
  procedures_selected =  procedure_typecast.select('provider_id','sample','score','measure_id')
