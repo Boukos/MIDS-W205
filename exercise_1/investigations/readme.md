@@ -15,7 +15,7 @@
  best_hospital_scores.join(hospital,best_hospital_scores.provider_id==hospital.provider_id).select('hospital_name').show(best_hospital_scores.count(),False)
 ```
  
- | ------------------------------------------- |                                 
+                                  
  |hospital_name                                |
  | ------------------------------------------- |
  |VA EASTERN KANSAS HEALTHCARE SYSTEM          |
@@ -34,6 +34,6 @@
  |SAINT JOSEPH BEREA                           |
  |PHILADELPHIA VA MEDICAL CENTER               |
  |VA BLACK HILLS HEALTHCARE SYSTEM - FORT MEADE|
- +---------------------------------------------+
+ 
  
  
