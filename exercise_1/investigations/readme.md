@@ -22,7 +22,7 @@
 | zebra stripes | 
                                   
  | hospital_name                               |
- | ------------------------------------------- |
+ | --- |
  | VA EASTERN KANSAS HEALTHCARE SYSTEM          |
  | ANDROSCOGGIN VALLEY HOSPITAL                 |
  | NEW LONDON HOSPITAL                          |
