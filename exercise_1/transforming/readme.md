@@ -16,7 +16,7 @@ Transforming the data from the data lake to the format specified in the [ER-diag
 
  From the surveys table the survey entity can be createdd by dropping some of the variables and keeping those that were intended to use for the analysis. In the end, only the HCAHPS Base and Consistency scores were used which are the aggregated measures of the other available subscores in the columns of the table.
 
-4. Create a measure entity.
+4. Creating a measure entity.
 
  Essentially, just rename the measure_info table.
  
