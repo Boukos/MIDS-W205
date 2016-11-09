@@ -7,7 +7,7 @@ These serving scripts offer an easy access to the PostgreSQL database where the 
     >> python histogram.py 65,70
 
 |word    |count|
-----------------
+|------- |-----|
 |guys    |   70|
 |month   |   70|
 |times   |   70|
@@ -17,7 +17,7 @@ These serving scripts offer an easy access to the PostgreSQL database where the 
 |chance  |   68|
 |yet     |   68|
 |or      |   67|
-||       |   67|
+|I       |   67|
 |Love    |   65|
 |few     |   65|
 |own     |   65|
