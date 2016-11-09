@@ -23,6 +23,7 @@ class DB_Query():
         return "Frequency of '{w}': {c}".format(w=word,c=count)
 
     def sort_list(self):
+        '''Lists each word and count in the database in an ascending order by word'''
         self.cur.execute("SELECT * FROM tweetwordcount ORDER BY word")
         return self.cur.fetchall()
 
