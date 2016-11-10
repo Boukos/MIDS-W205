@@ -53,7 +53,3 @@ or
 
 to start a tweetcounter application that drops and creates a new table each time it starts or an application which accumulates counts to an existing table (or creates a new one if it does not exist). Additionally, [serving scripts](serving-scripts) can be called to query the dataset.
 
-# to filter the most common 150+1 words
-psql -U w205
-
-SE
