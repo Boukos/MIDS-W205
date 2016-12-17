@@ -16,7 +16,7 @@
  best_hospital_scores.join(hospital,best_hospital_scores.provider_id==hospital.provider_id).select('hospital_name').show
                                                                              (best_hospital_scores.count(),False)
  ```
- In the script above, procedure_typecast is the dataframe which contains the correctly cast scores (doubles) and sample sizes (integers). Running, the script produces the table below. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/exercise_1/investigations/Best_hospitals.py).
+ In the script above, procedure_typecast is the dataframe which contains the correctly cast scores (doubles) and sample sizes (integers). Running, the script produces the table below. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/investigations/Best_hospitals.py).
  
  |          hospital_name                       | 
  | -------------------------------------------- |
@@ -50,7 +50,7 @@
  # show the 10 best states
  best_states = score_avg.sort(score_avg['avg(score)'].desc()).show(10)
  ```
- The commands are very similar to the previous script; the only difference is that here we need to group the hospitals by state and take their averages. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/exercise_1/investigations/best_states.py).  
+ The commands are very similar to the previous script; the only difference is that here we need to group the hospitals by state and take their averages. For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/investigations/best_states.py).  
                                                        
  |state|       avg(score)|
  |-----|-----------------|
@@ -78,7 +78,7 @@
  proc_svd_measures= proc_svd.join(measures,measures.measure_id==proc_svd.measure_id)
  proc_svd_measures.sort(proc_svd_measures['score_sd'].desc()).select("measure_id","measure_name","score_sd").show(10)
 ```
- For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/exercise_1/investigations/Variable_procedures.py).
+ For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/investigations/Variable_procedures.py).
 
  |measure_name                                                                               |score_sd          |
  |-------------------------------------------------------------------------------------------|------------------|
@@ -128,4 +128,4 @@
  measure_avg_surv.stat.corr('hcahps_base','hcahps_consistency')#
  0.6512279291606266
  ```
- For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/exercise_1/investigations/correlation.py).
+ For more information, refer to the [full PySpark script](https://github.com/adamlenart/MIDS-w205/blob/MIDS-w205/exercise_1/investigations/correlation.py).
