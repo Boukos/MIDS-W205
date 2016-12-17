@@ -1,0 +1,55 @@
+# start hadoop and postgres
+/root/start-­hadoop.sh
+/data/start_postgres.sh
+su - w205
+# create folders and hdfs folders
+mkdir exercise_1
+cd exercise_1
+mkdir data
+hdfs dfs -mkdir /user/w205/exercise_1
+hdfs dfs -mkdir /user/w205/exercise_1/hospitals
+hdfs dfs -mkdir /user/w205/exercise_1/effective_care
+hdfs dfs -mkdir /user/w205/exercise_1/readmissions
+hdfs dfs -mkdir /user/w205/exercise_1/measures
+hdfs dfs -mkdir /user/w205/exercise_1/surveys_responses
+# download data
+cd data
+wget -O data.zip https://data.medicare.gov/views/bg9k-emty/files/Nqcy71p9Ss2RSBWDmP77H1DQXcyacr2khotGbDHHW_s?content_type=application%2Fzip%3B%20charset%3Dbinary&filename=Hospital_Revised_Flatfiles.zip
+unzip data.zip
+# change whitespaces to underscores in the file names
+for f in *\ *; do mv "$f" "${f// /_}"; done
+cd ..
+# rename and strip the files to more human names
+mkdir loading_and_modelling
+# create data lake
+cd loading_and_modelling
+bash load_data_lake.sh
+hive –f /home/w205/exercise_1/hive_base_ddl.sql
+# start transformations
+cd ..
+mkdir transforming
+cd transforming
+/data/spark15/bin/spark-submit /home/w205/exercise_1/transforming/transform_effective_readmission.py 
+hive -f transform_hospital_info.sql
+hive -f transform_measure_info.sql
+hive -f transform_surveys.sql
+cd ..
+# start investigations
+mkdir investigations
+cd investigations
+mkdir best_hospitals
+cd best_hospitals
+/data/spark15/bin/spark-submit Best_hospitals.py 
+cd ..
+mkdir best_states
+cd best_states
+/data/spark15/bin/spark-submit best_states.py 
+cd ..
+mkdir hospital_variability
+cd hospital_variability
+/data/spark15/bin/spark-submit variable_procedures.py 
+cd ..
+mkdir hospital_and_patients
+cd hospital_and_patients
+/data/spark15/bin/spark-submit correlation.py 
+
